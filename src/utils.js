@@ -1,5 +1,7 @@
 'use strict';
 
+import Chart from 'chart.js';
+
 var helpers = Chart.helpers;
 
 var utils = {
@@ -19,7 +21,7 @@ var utils = {
 		font.string = utils.toFontString(font);
 		return font;
 	},
-    
+
 	toFontString: function(font) {
 		if (!font || helpers.isNullOrUndef(font.size) || helpers.isNullOrUndef(font.family)) {
 			return null;
@@ -30,7 +32,7 @@ var utils = {
 			+ font.size + 'px '
 			+ font.family;
 	},
-    
+
 	textSize: function(ctx, lines, font) {
 		var items = [].concat(lines);
 		var ilen = items.length;
@@ -46,13 +48,13 @@ var utils = {
 
 		ctx.font = prev;
 
-        var result = {
+		var result = {
 			height: ilen * font.lineHeight,
 			width: width
-        };
+		};
 		return result;
-    }
-    
+	}
+
 };
 
 export default utils;
