@@ -1,0 +1,28 @@
+{
+  "name": "chartjs-plugin-doughnutlabel",
+  "version": "1.0.0",
+  "description": "Chart.js plugin for doughnut chart to display text in the center",
+  "main": "dist/chartjs-plugin-doughnutlabel.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chartjs": "^0.3.24",
+    "eslint-config-chartjs": "^0.1.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.2",
+    "gulp-rename": "^1.2.3",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "path": "^0.12.7",
+    "rollup-stream": "^1.24.1",
+    "vinyl-source-stream": "^2.0.0",
+    "yargs": "^11.0.0"
+  },
+  "peerDependencies": {
+    "chart.js": ">= 2.7.0 < 3"
+  }
+}
