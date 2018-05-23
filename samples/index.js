@@ -1,8 +1,8 @@
-DEFAULT_COLORS1 = ['#f08700', '#f49f0a', '#efca08', '#00a6a6', '#bbdef0'];
-DEFAULT_COLORS2 = ['#7fb7be', '#357266', '#dacc3e', '#bc2c1a', '#7d1538'];
+var DEFAULT_COLORS1 = ['#f08700', '#f49f0a', '#efca08', '#00a6a6', '#bbdef0'];
+var DEFAULT_COLORS2 = ['#7fb7be', '#357266', '#dacc3e', '#bc2c1a', '#7d1538'];
 
 // Doughnut with multiple lines of text in the center
-var ctx =  document.getElementById("chart1").getContext("2d");
+var ctx = document.getElementById('chart1').getContext('2d');
 new Chart(ctx, {
 	type: 'doughnut',
 	data: {
@@ -11,7 +11,7 @@ new Chart(ctx, {
 			backgroundColor: DEFAULT_COLORS1,
 			label: 'Dataset 1'
 		}],
-		labels: ["Item one", "Item two", "Item three", "Item four"]
+		labels: ['Item one', 'Item two', 'Item three', 'Item four']
 	},
 	options: {
 		responsive: true,
@@ -33,14 +33,14 @@ new Chart(ctx, {
 				font: {
 					size: '60'
 				},
-				color: 'grey'						
+				color: 'grey'
 			}
 		}
 	}
 });
 
 // Doughnut with one line of text in the center
-var ctx =  document.getElementById("chart2").getContext("2d");
+ctx = document.getElementById('chart2').getContext('2d');
 new Chart(ctx, {
 	type: 'doughnut',
 	data: {
@@ -49,7 +49,7 @@ new Chart(ctx, {
 			backgroundColor: DEFAULT_COLORS2,
 			label: 'Dataset 1'
 		}],
-		labels: ["Item one", "Item two", "Item three", "Item four"]
+		labels: ['Item one', 'Item two', 'Item three', 'Item four']
 	},
 	options: {
 		responsive: true,
@@ -74,7 +74,7 @@ new Chart(ctx, {
 					style: 'italic',
 					weight: 'bold'
 				},
-				color: '#bc2c1a'						
+				color: '#bc2c1a'
 			}
 		}
 	}
