@@ -64,6 +64,7 @@ The following commands will then be available from the repository root:
     > gulp lint             // perform code linting
     > gulp build            // build dist files
     > gulp build --watch    // build and watch for changes
+		> gulp package          // create an archive with dist files and samples
 
 ## License
 
