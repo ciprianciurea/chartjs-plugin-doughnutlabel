@@ -1,4 +1,4 @@
-# Chart.js Doughnut plugin to allow for lines of tex in the middle
+# Chart.js Doughnut plugin to allow for lines of text in the middle
 
 Chart.js plugin module that allows to display multiple lines of text centered in the middle area of the doughnut charts 
 
