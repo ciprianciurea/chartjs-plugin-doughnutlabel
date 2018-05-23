@@ -69,7 +69,10 @@ new Chart(ctx, {
 			doughnutlabel: {
 				labels: ['This is one line of text'],
 				font: {
-					size: '60'
+					size: '60',
+					family: 'Arial, Helvetica, sans-serif',
+					style: 'italic',
+					weight: 'bold'
 				},
 				color: '#bc2c1a'						
 			}
