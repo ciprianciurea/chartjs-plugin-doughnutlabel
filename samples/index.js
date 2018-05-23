@@ -16,6 +16,7 @@ new Chart(ctx, {
 	options: {
 		responsive: true,
 		legend: {
+			display: false,
 			position: 'top',
 		},
 		title: {
@@ -54,6 +55,7 @@ new Chart(ctx, {
 	options: {
 		responsive: true,
 		legend: {
+			display: false,
 			position: 'top',
 		},
 		title: {
