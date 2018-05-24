@@ -3,7 +3,7 @@
 Chart.js plugin module that allows to display multiple lines of text centered in the middle area of the doughnut charts 
 
 ## Demo
-https://ciprianciurea.github.io/chartjs-plugin-doughnutlabel/samples/index.html
+Have a look at the [Demo page](https://ciprianciurea.github.io/chartjs-plugin-doughnutlabel/samples/index.html).
 
 ## Table of contents
 
