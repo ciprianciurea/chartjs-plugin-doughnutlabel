@@ -12,9 +12,18 @@ function drawDoughnutLabel(chart, options) {
 	if (options && options.labels && options.labels.length > 0) {
 		var ctx = chart.ctx;
 		var resolve = helpers.options.resolve;
-		var color = resolve([options.color, Chart.defaults.global.defaultFontColor], ctx, 0);
-		var font = utils.parseFont(resolve([options.font, {}], ctx, 0));
-		var textAreaSize = utils.textSize(ctx, options.labels, font);
+
+		var innerLabels = [];
+		options.labels.forEach(function(label) {
+			var innerLabel = {
+				text: label.text,
+				font: utils.parseFont(resolve([label.font, options.font, {}], ctx, 0)),
+				color: resolve([label.color, options.color, Chart.defaults.global.defaultFontColor], ctx, 0)
+			};
+			innerLabels.push(innerLabel);
+		});
+
+		var textAreaSize = utils.textSize(ctx, innerLabels);
 
 		// Calculate the adjustment ratio to fit the text area into the doughnut inner circle
 		var hypotenuse = Math.sqrt(Math.pow(textAreaSize.width, 2) + Math.pow(textAreaSize.height, 2));
@@ -23,16 +32,17 @@ function drawDoughnutLabel(chart, options) {
 
 		// Adjust the font if necessary and recalculate the text area after applying the fit ratio
 		if (fitRatio < 1) {
-			font.size = Math.floor(font.size * fitRatio);
-			font.lineHeight = undefined;
-			font = utils.parseFont(resolve([font, {}], ctx, 0));
-			textAreaSize = utils.textSize(ctx, options.labels, font);
+			innerLabels.forEach(function(innerLabel) {
+				innerLabel.font.size = Math.floor(innerLabel.font.size * fitRatio);
+				innerLabel.font.lineHeight = undefined;
+				innerLabel.font = utils.parseFont(resolve([innerLabel.font, {}], ctx, 0));
+			});
+
+			textAreaSize = utils.textSize(ctx, innerLabels);
 		}
 
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'middle';
-		ctx.fillStyle = color;
-		ctx.font = font.string;
 
 		// The center of the inner circle
 		var centerX = ((chart.chartArea.left + chart.chartArea.right) / 2);
@@ -42,13 +52,18 @@ function drawDoughnutLabel(chart, options) {
 		var topY = centerY - textAreaSize.height / 2;
 
 		var i;
-		var ilen = options.labels.length;
+		var ilen = innerLabels.length;
+		var currentHeight = 0;
 		for (i = 0; i < ilen; ++i) {
+			ctx.fillStyle = innerLabels[i].color;
+			ctx.font = innerLabels[i].font.string;
+
 			// The Y center of each line
-			var lineCenterY = topY + font.lineHeight / 2 + font.lineHeight * i;
+			var lineCenterY = topY + innerLabels[i].font.lineHeight / 2 + currentHeight;
+			currentHeight += innerLabels[i].font.lineHeight;
 
 			// Draw each line of text
-			ctx.fillText(options.labels[i], centerX, lineCenterY);
+			ctx.fillText(innerLabels[i].text, centerX, lineCenterY);
 		}
 	}
 }

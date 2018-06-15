@@ -33,23 +33,24 @@ var utils = {
 			+ font.family;
 	},
 
-	textSize: function(ctx, lines, font) {
-		var items = [].concat(lines);
+	textSize: function(ctx, labels) {
+		var items = [].concat(labels);
 		var ilen = items.length;
 		var prev = ctx.font;
 		var width = 0;
+		var height = 0;
 		var i;
 
-		ctx.font = font.string;
-
 		for (i = 0; i < ilen; ++i) {
-			width = Math.max(ctx.measureText(items[i]).width, width);
+			ctx.font = items[i].font.string;
+			width = Math.max(ctx.measureText(items[i].text).width, width);
+			height += items[i].font.lineHeight;
 		}
 
 		ctx.font = prev;
 
 		var result = {
-			height: ilen * font.lineHeight,
+			height: height,
 			width: width
 		};
 		return result;

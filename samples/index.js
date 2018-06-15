@@ -1,3 +1,5 @@
+'use strict';
+
 var DEFAULT_COLORS1 = ['#f08700', '#f49f0a', '#efca08', '#00a6a6', '#bbdef0'];
 var DEFAULT_COLORS2 = ['#7fb7be', '#357266', '#dacc3e', '#bc2c1a', '#7d1538'];
 
@@ -30,11 +32,35 @@ new Chart(ctx, {
 		},
 		plugins: {
 			doughnutlabel: {
-				labels: ['The title', 'The subtitle', '$100.000', '95%'],
-				font: {
-					size: '60'
-				},
-				color: 'grey'
+				labels: [
+					{
+						text: 'The title',
+						font: {
+							size: '60'
+						}
+					},
+					{
+						text: 'The subtitle',
+						font: {
+							size: '50'
+						},
+						color: 'grey'
+					},
+					{
+						text: '$100.000',
+						font: {
+							size: '30'
+						},
+						color: 'red'
+					},
+					{
+						text: '95%',
+						font: {
+							size: '45'
+						},
+						color: 'green'
+					}
+				]
 			}
 		}
 	}
@@ -69,14 +95,18 @@ new Chart(ctx, {
 		},
 		plugins: {
 			doughnutlabel: {
-				labels: ['This is one line of text'],
-				font: {
-					size: '60',
-					family: 'Arial, Helvetica, sans-serif',
-					style: 'italic',
-					weight: 'bold'
-				},
-				color: '#bc2c1a'
+				labels: [
+					{
+						text: 'This is one line of text',
+						font: {
+							size: '60',
+							family: 'Arial, Helvetica, sans-serif',
+							style: 'italic',
+							weight: 'bold'
+						},
+						color: '#bc2c1a'
+					}
+				]
 			}
 		}
 	}
