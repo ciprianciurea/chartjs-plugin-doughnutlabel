@@ -28,14 +28,35 @@ var myDoughnutChart = new Chart(ctx, {
   options: {
     plugins: {
       doughnutlabel: {
-        labels: ['The title', 'The subtitle', '$100.000', '95%'],
-        font: {
-					size: '60',
-					family: 'Arial, Helvetica, sans-serif',
-					style: 'italic',
-					weight: 'bold'
-        },
-        color: 'grey'						
+				labels: [
+					{
+						text: 'The title',
+						font: {
+							size: '60'
+						}
+					},
+					{
+						text: 'The subtitle',
+						font: {
+							size: '50'
+						},
+						color: 'grey'
+					},
+					{
+						text: '$100.000',
+						font: {
+							size: '30'
+						},
+						color: 'red'
+					},
+					{
+						text: '95%',
+						font: {
+							size: '45'
+						},
+						color: 'green'
+					}
+				]
       }
     }		
   }
