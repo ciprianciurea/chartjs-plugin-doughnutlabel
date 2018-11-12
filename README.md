@@ -36,7 +36,7 @@ var myDoughnutChart = new Chart(ctx, {
             }
           },
           {
-            text: 'The subtitle',
+            text: getTotal,
             font: {
               size: '50'
             },
@@ -61,6 +61,11 @@ var myDoughnutChart = new Chart(ctx, {
     }		
   }
 });
+
+var getTotal = function() {
+	var sum = myDoughnutChart.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
+	return `Total: ${sum}`;
+}
 ```
 
 ### Usage without a module bundler
