@@ -12,8 +12,8 @@ document.getElementById('randomizeData').addEventListener('click', function() {
 	myChart3.update();
 });
 
-var getTotal = function() {
-	var sum = myChart3.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
+var getTotal = function(myChart) {
+	var sum = myChart.config.data.datasets[0].data.reduce((a, b) => a + b, 0);
 	return `Total: ${sum}`;
 }
 
