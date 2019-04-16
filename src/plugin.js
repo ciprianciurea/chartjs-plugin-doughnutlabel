@@ -15,7 +15,7 @@ function drawDoughnutLabel(chart, options) {
 
 		var innerLabels = [];
 		options.labels.forEach(function(label) {
-			var text = typeof(label.text) === 'function' ?  label.text() :  label.text;
+			var text = typeof(label.text) === 'function' ? label.text(chart) :  label.text;
 			var innerLabel = {
 				text: text,
 				font: utils.parseFont(resolve([label.font, options.font, {}], ctx, 0)),
