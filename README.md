@@ -92,6 +92,11 @@ The following commands will then be available from the repository root:
     > gulp build --watch    // build and watch for changes
     > gulp package          // create an archive with dist files and samples
 
+## In Angular
+
+For an example on how to use this plugin with angular, please check this stackblitz prototype:
+[doughnutlabel plugin in angular](https://stackblitz.com/edit/angular-v9tfg7)
+
 ## License
 
 `chartjs-plugin-doughnutlabel` is available under the [MIT license](LICENSE.md).
