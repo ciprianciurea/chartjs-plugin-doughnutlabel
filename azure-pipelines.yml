@@ -1,0 +1,72 @@
+# Azure DevOps release pipeline for chartjs-plugin-doughnutlabel
+# Bumps the version in package.json, builds the project, and publishes the artifact.
+#
+# Trigger manually (via "Run pipeline") or on pushes to the main/master branch.
+# Set the `versionBump` variable at queue time to control which part of the
+# semantic version is incremented: patch (default), minor, or major.
+
+trigger:
+  branches:
+    include:
+      - master
+
+pr: none   # Do not run on pull-request builds
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  - name: versionBump
+    value: patch   # Override at queue time with: patch | minor | major
+
+steps:
+  # ── 1. Check out with a full (non-shallow) clone so git push works ──────────
+  - checkout: self
+    persistCredentials: true
+    fetchDepth: 0
+
+  # ── 2. Set up Node.js ────────────────────────────────────────────────────────
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '20.x'
+    displayName: 'Install Node.js'
+
+  # ── 3. Install dependencies ──────────────────────────────────────────────────
+  - script: npm ci
+    displayName: 'npm ci'
+
+  # ── 4. Bump version in package.json and capture the new version ──────────────
+  # npm version returns a string like "v1.2.3". Strip the leading "v" so that
+  # the version value stored in newVersion is a plain semver string (e.g. "1.2.3")
+  # that matches the format used inside package.json.
+  - script: |
+      git config user.email "azure-pipelines@dev.azure.com"
+      git config user.name  "Azure Pipelines"
+      RAW_VERSION=$(npm version $(versionBump) --git-tag-version=false)
+      NEW_VERSION="${RAW_VERSION#v}"
+      echo "##vso[task.setvariable variable=newVersion]$NEW_VERSION"
+      echo "Bumped version to $NEW_VERSION"
+    displayName: 'Bump version ($(versionBump))'
+
+  # ── 5. Build the distributable files ─────────────────────────────────────────
+  - script: npx gulp build
+    displayName: 'Build (gulp)'
+
+  # ── 6. Commit the updated package.json back to the repository ────────────────
+  # Pull the latest remote changes (rebase) before pushing to reduce the risk
+  # of conflicts when multiple pipeline runs execute concurrently.
+  - script: |
+      git pull --rebase origin $(Build.SourceBranchName)
+      git add package.json package-lock.json
+      git commit -m "chore: release v$(newVersion) [skip ci]"
+      git tag "v$(newVersion)"
+      git push origin HEAD:$(Build.SourceBranchName) --tags
+    displayName: 'Commit and tag version bump'
+
+  # ── 7. Publish the built artifact for the Azure DevOps release stage ─────────
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: 'dist'
+      ArtifactName: 'chartjs-plugin-doughnutlabel-$(newVersion)'
+      publishLocation: 'Container'
+    displayName: 'Publish build artifact'
